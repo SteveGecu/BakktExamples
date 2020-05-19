@@ -60,6 +60,7 @@ public class DemoOne {
     }
 
     @Test
+    @DisplayName("Extracting all first names from query in to a Java list")
     public void Test3(){
         String URL ="https://gecho.gigalixirapp.com/api/ascendum-qa/students/query";
         String query = "{\"query\":\"{\\n    greeting\\n    students " +
