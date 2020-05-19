@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -32,7 +33,8 @@ public class DemoOne {
     @DisplayName("Extracting id, name and company name from first query")
     public void Test2(){
         String URL = "https://gecho.gigalixirapp.com/api/SteveGecu/FirstSchema/query";
-        String query="{\"query\":\"{\\n    getAuthors {\\n        id\\n        name\\n        company\\n    }\\n}\",\"variables\":{}}";
+        String query="{\"query\":\"{\\n    getAuthors {\\n        id\\n        name\\n        " +
+                "company\\n    }\\n}\",\"variables\":{}}";
 
         Response response =
                 given()
@@ -55,6 +57,25 @@ public class DemoOne {
         System.out.println("name is= " + name);
         System.out.println("companyName is= " + companyName);
 
+    }
 
+    @Test
+    public void Test3(){
+        String URL ="https://gecho.gigalixirapp.com/api/ascendum-qa/students/query";
+        String query = "{\"query\":\"{\\n    greeting\\n    students " +
+                "{\\n        firstName\\n        lastName\\n        email\\n        " +
+                "SAT\\n        city\\n        state\\n    }\\n    \\n}\",\"variables\":{}}";
+
+        Response response =
+                given()
+                        .contentType(ContentType.JSON)
+                        .body(query)
+                .when()
+                        .post(URL);
+        Assert.assertEquals(200,response.statusCode());
+
+        response.prettyPeek();
+        List<Object> nameList = response.jsonPath().getList("data.students.firstName");
+        System.out.println("nameList = " + nameList);
     }
 }
