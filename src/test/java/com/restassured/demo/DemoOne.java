@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 public class DemoOne {
 
     @Test
-    @DisplayName("Validating status code and extracting payload")
+    @DisplayName("Validating status code and extracting payload yenitest")
     public void Test1(){
         String URL = "https://gecho.gigalixirapp.com/api/SteveGecu/FirstSchema/query";
         String query="{\"query\":\"{\\n    getAuthors {\\n        id\\n        name\\n        company\\n    }\\n}\",\"variables\":{}}";
